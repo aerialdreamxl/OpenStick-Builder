@@ -9,6 +9,7 @@ This builder uses the precompiled [kernel](https://pkgs.postmarketos.org/package
 ## Modifications by AerialdreamXL
 - [X] `export BUILDER_USE_MIRROR_SITE=YES` to activate tsinghua tuna mirror site
 - [X] support debian trixie
+- [X] A trimmed version of UFI001C dtb that have more RAM instead of a useless modem
 
 ## Build Instructions
 ### Build locally
