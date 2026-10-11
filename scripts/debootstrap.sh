@@ -1,23 +1,37 @@
 #!/bin/sh -e
 
 CHROOT=${CHROOT=$(pwd)/rootfs}
-RELEASE=${RELEASE=stable}
+#RELEASE=${RELEASE=stable}
+RELEASE=trixie
 HOST_NAME=${HOST_NAME=openstick-debian}
 
 rm -rf ${CHROOT}
 
-debootstrap --foreign --arch arm64 \
-    --keyring /usr/share/keyrings/debian-archive-keyring.gpg ${RELEASE} ${CHROOT}
+if [ "$BUILDER_USE_MIRROR_SITE" = "YES" ]; then
+    debootstrap --foreign --arch arm64 --keyring /usr/share/keyrings/debian-archive-keyring.gpg ${RELEASE} ${CHROOT} \
+    http://mirrors.tuna.tsinghua.edu.cn/debian/
+else
+    debootstrap --foreign --arch arm64 --keyring /usr/share/keyrings/debian-archive-keyring.gpg ${RELEASE} ${CHROOT}
+fi
 
 cp $(which qemu-aarch64-static) ${CHROOT}/usr/bin
 
 chroot ${CHROOT} qemu-aarch64-static /bin/bash /debootstrap/debootstrap --second-stage
 
-cat << EOF > ${CHROOT}/etc/apt/sources.list
+if [ "$BUILDER_USE_MIRROR_SITE" = "YES" ]; then
+    cat << EOF > ${CHROOT}/etc/apt/sources.list
+deb http://mirrors.tuna.tsinghua.edu.cn/debian/ ${RELEASE} main contrib non-free-firmware
+deb http://mirrors.tuna.tsinghua.edu.cn/debian/ ${RELEASE}-updates main contrib non-free-firmware
+deb http://mirrors.tuna.tsinghua.edu.cn/debian/ trixie-backports main contrib non-free non-free-firmware
+deb http://mirrors.tuna.tsinghua.edu.cn/debian-security/ ${RELEASE}-security main contrib non-free-firmware
+EOF
+else
+    cat << EOF > ${CHROOT}/etc/apt/sources.list
 deb http://deb.debian.org/debian ${RELEASE} main contrib non-free-firmware
 deb http://deb.debian.org/debian-security/ ${RELEASE}-security main contrib non-free-firmware
 deb http://deb.debian.org/debian ${RELEASE}-updates main contrib non-free-firmware
 EOF
+fi
 
 mount -t proc proc ${CHROOT}/proc/
 mount -t sysfs sys ${CHROOT}/sys/

@@ -6,6 +6,10 @@ This builder uses the precompiled [kernel](https://pkgs.postmarketos.org/package
 > [!NOTE]
 > This branch generates a `debian` image, use the [alpine branch](https://github.com/kinsamanka/OpenStick-Builder/tree/alpine) for an `alpine` image.
 
+## Modifications by AerialdreamXL
+- [X] `export BUILDER_USE_MIRROR_SITE=YES` to activate tsinghua tuna mirror site
+- [X] support debian trixie
+
 ## Build Instructions
 ### Build locally
 This has been tested to work on **Ubuntu 22.04**
