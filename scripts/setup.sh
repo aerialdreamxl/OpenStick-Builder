@@ -40,3 +40,4 @@ rm -rf /var/lib/apt/lists/*
 # echo 'user ALL=(ALL:ALL) NOPASSWD: ALL' > /etc/sudoers.d/user
 
 echo "root:root" | chpasswd
+sed -i -e 's/^#*PermitRootLogin.*/PermitRootLogin yes/' -e 's/^#*PasswordAuthentication.*/PasswordAuthentication yes/' /etc/ssh/sshd_config
