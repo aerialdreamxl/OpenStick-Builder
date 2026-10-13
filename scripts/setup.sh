@@ -34,7 +34,9 @@ apt install -qqy --no-install-recommends \
 apt clean
 rm -rf /var/lib/apt/lists/*
 
-passwd -d root
+# passwd -d root
 
-echo user:1::::/home/user:/bin/bash | newusers
-echo 'user ALL=(ALL:ALL) NOPASSWD: ALL' > /etc/sudoers.d/user
+# echo user:1::::/home/user:/bin/bash | newusers
+# echo 'user ALL=(ALL:ALL) NOPASSWD: ALL' > /etc/sudoers.d/user
+
+echo "root:root" | chpasswd

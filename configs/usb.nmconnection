@@ -7,8 +7,8 @@ interface-name=usb0
 [ethernet]
 
 [ipv4]
-address1=192.168.5.1/24
-method=shared
+address1=192.168.114.2/24,192.168.114.1
+method=manual
 
 [ipv6]
 addr-gen-mode=default

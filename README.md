@@ -10,6 +10,8 @@ This builder uses the precompiled [kernel](https://pkgs.postmarketos.org/package
 - [X] `export BUILDER_USE_MIRROR_SITE=YES` to activate tsinghua tuna mirror site
 - [X] support debian trixie
 - [X] A trimmed version of UFI001C dtb that have more RAM instead of a useless modem
+- [X] Workaround for usb0 network to prevent computer accessing internet through dongle
+- [X] use `root` account which can let user create their account later after login
 
 ## Build Instructions
 ### Build locally
@@ -143,14 +145,14 @@ Edit [`scripts/setup.sh`](scripts/setup.sh) to add/remove packages. Note that th
 
   | usb0 | |
   | ----- | ---- |
-  | ip addr | 192.168.5.1 |
+  | ip addr | 192.168.114.2 |
 
 - Default user
   
   | | |
   | ----- | ---- |
-  | username | user |
-  | password | 1 |
+  | username | root |
+  | password | root |
  
 - If your device is not based on **UZ801**, modify `/boot/extlinux/extlinux.conf` to use the correct devicetree
   ```shell
