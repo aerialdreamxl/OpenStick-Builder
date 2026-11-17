@@ -15,7 +15,7 @@ jobs:
         run: sudo docker run -d --name builder -v $(pwd):/mnt/workdir -w /mnt/workdir ubuntu:noble tail -f /dev/null
       
       - name: Binfmt tricks to cross platform
-        run: sudo apt update && sudo apt install qemu-user-binfmt
+        run: sudo apt update && sudo apt install -y qemu-user-binfmt
       
       - name: Install dependencies
         run: sudo docker exec -i builder /bin/bash -c "sh -e scripts/install_deps.sh"
