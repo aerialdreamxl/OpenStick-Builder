@@ -12,6 +12,7 @@ This builder uses the precompiled [kernel](https://pkgs.postmarketos.org/package
 - [X] A trimmed version of UFI001C dtb that have more RAM instead of a useless modem
 - [X] Workaround for usb0 network to prevent computer accessing internet through dongle
 - [X] use `root` account which can let user create their account later after login
+- [X] Docker-ify after some workflow problem
 
 ## Build Instructions
 ### Build locally
