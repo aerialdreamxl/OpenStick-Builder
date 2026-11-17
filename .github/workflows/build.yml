@@ -15,22 +15,22 @@ jobs:
         run: sudo docker run -d --name builder -v $(pwd):/mnt/workdir -w /mnt/workdir ubuntu:noble tail -f /dev/null
 
       - name: Install dependencies
-        run: sudo docker exec -it builder /bin/bash -c "sh -e scripts/install_deps.sh"
+        run: sudo docker exec -i builder /bin/bash -c "sh -e scripts/install_deps.sh"
 
       - name: Build hyp and aboot firmware
-        run: sudo docker exec -it builder /bin/bash -c "sh -e scripts/build_hyp_aboot.sh"
+        run: sudo docker exec -i builder /bin/bash -c "sh -e scripts/build_hyp_aboot.sh"
 
       - name: Extract MSM8916 firmware
-        run: sudo docker exec -it builder /bin/bash -c "sh -e scripts/extract_fw.sh"
+        run: sudo docker exec -i builder /bin/bash -c "sh -e scripts/extract_fw.sh"
 
       - name: Create rootfs
-        run: sudo docker exec -it builder /bin/bash -c "sh -e scripts/debootstrap.sh"
+        run: sudo docker exec -i builder /bin/bash -c "sh -e scripts/debootstrap.sh"
 
       - name: Build gadget-tool
-        run: sudo docker exec -it builder /bin/bash -c "sh -e scripts/build_gt.sh"
+        run: sudo docker exec -i builder /bin/bash -c "sh -e scripts/build_gt.sh"
 
       - name: Create images
-        run: sudo docker exec -it builder /bin/bash -c "sh -e scripts/build_images.sh"
+        run: sudo docker exec -i builder /bin/bash -c "sh -e scripts/build_images.sh"
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
