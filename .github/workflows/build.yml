@@ -12,7 +12,7 @@ jobs:
         with:
           submodules: true
       - name: Spin up a container
-        run: sudo docker run -d --name builder -v $(pwd):/mnt/workdir -w /mnt/workdir ubuntu:noble tail -f /dev/null
+        run: sudo docker run -d --name builder --privileged -v $(pwd):/mnt/workdir -w /mnt/workdir ubuntu:noble tail -f /dev/null
       
       - name: Binfmt tricks to cross platform
         run: sudo apt update && sudo apt install -y qemu-user-binfmt
